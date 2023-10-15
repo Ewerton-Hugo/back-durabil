@@ -3,13 +3,13 @@
   "version": "1.0.0",
   "main": "index.js",
   "engines": {
-    "node": "14.X"
+    "node": "18"
   },
   "scripts": {
     "start": "node ./src/index.js",
     "dev": "nodemon ./src/index.js"
   },
-  "author": "",
+  "author": "Ewerton Hugo <ewerton.hugo@souunit.com.br>",
   "license": "ISC",
   "description": "",
   "dependencies": {
@@ -19,6 +19,7 @@
     "nodemon": "^3.0.1",
     "pg": "^8.11.3",
     "sequelize": "^6.33.0",
+    "vercel": "^32.4.1",
     "yup": "^1.3.2"
   }
 }
