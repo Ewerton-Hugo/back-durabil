@@ -1,6 +1,7 @@
 const { PrediosAmbientes } = require("../models/predios_ambientes");
 const { PrediosAreas } = require("../models/predios_areas");
 const { TabelasValores } = require("../models/tabelas_valores");
+const { sequelize } = require("../config/sequelizeConf")
 const yup = require('yup');
 class ApiService {
   constructor() {
@@ -135,6 +136,32 @@ class ApiService {
       res.status(500).json({ error: error.message });
     }
   }
+
+  async iotMedicoes(req, res, data) {
+    try {
+      console.log("Chamando a função PostgreSQL func_iot_recebe");
+  
+      // Chame a função PostgreSQL func_iot_recebe
+      const query = 'SELECT func_iot_recebe(:data) as result';
+      const [results, metadata] = await sequelize.query(query, {
+        replacements: { data },
+        type: sequelize.QueryTypes.SELECT,
+      });
+  
+      // O resultado da função estará em results[0].result
+      const result = results;
+  
+      // Você pode fazer o que for necessário com o resultado aqui
+      console.log('Resultado da função:', result);
+  
+      res.json({ message: 'Medições recebidas com sucesso', result });
+    } catch (error) {
+      console.error('Erro ao chamar a função PostgreSQL:', error);
+      res.status(500).json({ error: error.message });
+    }
+  }
+  
+  
 }
 
 module.exports = {

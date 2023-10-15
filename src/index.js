@@ -9,12 +9,12 @@ const cors = require('cors');
 const app = express();
 app.use(express.json());
 app.use(cors())
-const PORT =  9001;
+const PORT =  3000;
 
 app.use(bodyParser.json());
 
 // Use as rotas importadas
-app.use(routes);
+app.use(routes); 
 
 
 

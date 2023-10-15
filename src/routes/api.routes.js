@@ -35,6 +35,10 @@ routes.get("/TabValores", async (req, res) => {
   apiController.getTabValores(req, res);
 });
 
+routes.post('/iot_medicoes/:data', async (req, res) => {
+
+  apiController.iotMedicoes(req, res)
+})
 module.exports = {
   routes,
 };

@@ -52,7 +52,12 @@ class ApiController {
 
    async getTabValores(req, res) {
     await this.apiService.getTabValores(req,res)
-}
+  }
+
+    async iotMedicoes(req, res){
+        const data = req.params.data;
+        await this.apiService.iotMedicoes(req,res,data)
+    }
 }
 
 module.exports = {
