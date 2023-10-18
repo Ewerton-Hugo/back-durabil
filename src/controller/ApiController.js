@@ -58,6 +58,11 @@ class ApiController {
         const data = req.params.data;
         await this.apiService.iotMedicoes(req,res,data)
     }
+    
+    async atividadesPredio(req, res){
+        const jsonData = req.body;
+        await this.apiService.atividadesPredio(req,res,jsonData)
+    }
 }
 
 module.exports = {

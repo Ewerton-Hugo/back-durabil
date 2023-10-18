@@ -160,6 +160,23 @@ class ApiService {
       res.status(500).json({ error: error.message });
     }
   }
+
+  async atividadesPredio(req, res, jsonData) {
+    try {
+      const result = await sequelize.query(`
+        SELECT public.func_json_atividades_predio_v1('${JSON.stringify(jsonData)}') AS result;
+      `, {
+        type: sequelize.QueryTypes.SELECT
+      });
+  
+      res.json(result[0].result);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Erro ao executar a função func_json_atividades_predio_v1' });
+    }
+  };
+  
+  
   
   
 }

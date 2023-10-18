@@ -39,6 +39,12 @@ routes.post('/iot_medicoes/:data', async (req, res) => {
 
   apiController.iotMedicoes(req, res)
 })
+
+
+routes.post('/atividadesPredio/', async (req, res) => {
+
+  apiController.atividadesPredio(req, res)
+})
 module.exports = {
   routes,
 };
