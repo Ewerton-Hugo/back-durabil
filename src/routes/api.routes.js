@@ -45,6 +45,42 @@ routes.post('/atividadesPredio/', async (req, res) => {
 
   apiController.atividadesPredio(req, res)
 })
+//********************************** */
+
+//P.Equipamentos
+routes.get("/PrediosEquipamentos", async (req, res) => {
+  apiController.getPredioFerramentas(req, res);
+});
+
+routes.get("/PrediosEquipamentos/:id", async (req, res) => {
+  apiController.getPrediosFerramentasById(req, res);
+});
+
+routes.post("/PrediosEquipamentos", async (req, res) => {
+  await apiController.createPrediosFerramentas(req, res);
+});
+
+routes.put("/PrediosEquipamentos/:id", async (req, res) => {
+  await apiController.updatePrediosFerramentasById(req, res);
+});
+
+routes.put("/PrediosEquipamentos/excluir/:id", async (req, res) => {
+  await apiController.deletePrediosFerramentasById(req, res);
+});
+
+//PE-reqs
+routes.get("/PrediosEquipamentosAmb", async (req, res) => {
+  apiController.getPredioFerramentasAmbiente(req, res);
+});
+
+routes.get("/PrediosEquipamentosMod", async (req, res) => {
+  apiController.getPredioFerramentasModelo(req, res);
+});
+
+routes.get("/PrediosEquipamentosUser", async (req, res) => {
+  apiController.getPredioFerramentasUser(req, res);
+});
+
 module.exports = {
   routes,
 };

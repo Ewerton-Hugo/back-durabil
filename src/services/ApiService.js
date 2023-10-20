@@ -137,6 +137,144 @@ class ApiService {
     }
   }
 
+    //PE
+    async getAllPrediosFerramentas(req, res) {
+      try {
+        const prediosEquipamento = await PrediosEquipamentos.findAll({
+          where: {
+            predio_id: 2
+          },
+          include: [
+            {
+              model: PrediosAmbientes,
+              as: "predios_ambientes", // Alias do modelo de PrediosAreas
+            },
+            {
+              model: EquipamentosModelo,
+              as: "equipamentos_modelo", // Alias do modelo de TabelasValores
+            },
+          ],
+        });
+        if (!prediosEquipamento || prediosEquipamento.length === 0) {
+          return res.status(404).json({ message: "Nenhum usuário encontrado" });
+        }
+        return res.status(200).json(prediosEquipamento); // Envie a resposta aqui
+      } catch (error) {
+        console.error("Erro em getAllUsers:", error);
+        res.status(500).json({ error: error.message });
+      }
+    }
+    async getPrediosEquipamentosById(id, req, res) {
+      try {
+        const prediosEquipamento = await PrediosEquipamentos.findByPk(id, {
+          include: ["predios_ambientes", "equipamentos_modelo","users"],
+        });
+        if (prediosEquipamento) {
+          res.status(200).json(prediosEquipamento);
+        } else {
+          res.status(404).json({ message: "Usuário não encontrado" });
+        }
+      } catch (error) {
+        res.status(500).json({ error: error.message });
+      }
+    }
+  
+    async createPrediosEquipamento(data, req, res) {
+      try {
+        data.predio_id = 2
+        data.token= "dasdasda" 
+        return await PrediosEquipamentos.create(data);
+      } catch (error) {
+        res.status(500).json({ error: error.message });
+      }
+    }
+  
+    async updatePrediosEquipamentosById(id, newData, req, res) {
+      try {
+        const prediosEquipamento = await PrediosEquipamentos.findByPk(id);
+        if (!prediosEquipamento) {
+          throw new Error("Usuário não encontrado");
+        }
+        await prediosEquipamento.update(newData);
+        res.status(200).json(prediosEquipamento);
+      } catch (error) {
+        res.status(500).json({ error: error.message });
+      }
+    }
+  
+    async deletePrediosEquipamentosById(id,excluido) {
+      try {
+        const prediosEquipamento = await PrediosEquipamentos.findByPk(id);
+        if (!prediosEquipamento) {
+          throw new Error("PredioAmbiente não encontrado");
+        }
+    
+        // Atualize o campo 'excluido' com o valor fornecido
+        prediosEquipamento.excluido = excluido;
+        await prediosEquipamento.save();
+    
+        // Retorna a instância atualizada
+        return prediosEquipamento;
+      } catch (error) {
+        throw error;
+      }
+    }
+  
+    //PE-reqs
+    async getPredioAmb(req, res) {
+      try {
+        const prediosAmbiente = await PrediosAmbientes.findAll({
+          where: {
+            predio_id: 2
+          },
+        });
+        if (!prediosAmbiente || prediosAmbiente.length === 0) {
+          return res.status(404).json({ message: "Nenhum usuário encontrado" });
+        }
+        return res.status(200).json(prediosAmbiente); // Envie a resposta aqui
+      } catch (error) {
+        console.error("Erro em getAllUsers:", error);
+        res.status(500).json({ error: error.message });
+      }
+    }
+    async getPredioMod(req, res) {
+      try {
+        const prediosAmbiente = await EquipamentosModelo.findAll({
+          where: {
+            predio_id: 2
+          },
+        });
+        if (!prediosAmbiente || prediosAmbiente.length === 0) {
+          return res.status(404).json({ message: "Nenhum usuário encontrado" });
+        }
+        return res.status(200).json(prediosAmbiente); // Envie a resposta aqui
+      } catch (error) {
+        console.error("Erro em getAllUsers:", error);
+        res.status(500).json({ error: error.message });
+      }
+    }
+    async getPredioUser(req, res) {
+      try {
+        const prediosEquipamentos = await PrediosUsers.findAll({
+          include:{
+            model:Users,
+            as:"users",
+          },
+          where: {
+            predio_id: 2
+          },
+        });
+        if (!prediosEquipamentos || prediosEquipamentos.length === 0) {
+          return res.status(404).json({ message: "Nenhum usuário encontrado" });
+        }
+        return res.status(200).json(prediosEquipamentos); // Envie a resposta aqui
+      } catch (error) {
+        console.error("Erro em getAllUsers:", error);
+        res.status(500).json({ error: error.message });
+      }
+    }
+  
+
   async iotMedicoes(req, res, data) {
     try {
       console.log("Chamando a função PostgreSQL func_iot_recebe");
