@@ -1,7 +1,11 @@
 const { PrediosAmbientes } = require("../models/predios_ambientes");
 const { PrediosAreas } = require("../models/predios_areas");
 const { TabelasValores } = require("../models/tabelas_valores");
-const { sequelize } = require("../config/sequelizeConf")
+const { PrediosEquipamentos } = require("../models/predios_equipamentos");
+const { EquipamentosModelo } = require("../models/equipamentos_modelo");
+const { PrediosUsers } = require("../models/predios_users");
+const { Users } = require("../models/users");
+
 const yup = require('yup');
 class ApiService {
   constructor() {
