@@ -5,6 +5,7 @@ const { PrediosEquipamentos } = require("../models/predios_equipamentos");
 const { EquipamentosModelo } = require("../models/equipamentos_modelo");
 const { PrediosUsers } = require("../models/predios_users");
 const { Users } = require("../models/users");
+const { sequelize } = require("../config/sequelizeConf")
 
 const yup = require('yup');
 class ApiService {
